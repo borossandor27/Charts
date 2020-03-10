@@ -12,38 +12,16 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Charts
 {
-    public partial class Form1 : Form
+    public partial class Form_nyito : Form
     {
         string adatforras = "";
-        List<Adat> adatok = new List<Adat>();
-        public Form1()
+        public Form_nyito()
         {
             InitializeComponent();
         }
 
         private void button_Betolt_Click(object sender, EventArgs e)
         {
-            //foreach (DriveInfo Drive in DriveInfo.GetDrives())
-            //{
-            //    foreach (string filePath in Directory.GetDirectories(Drive.Name))
-            //    {
-            //        try
-            //        {
-            //            if (!string.IsNullOrWhiteSpace(filePath) && !filePath.ToLower().Contains("program files") && !filePath.ToLower().Contains("$"))
-            //            {
-            //                foreach (string f in Directory.GetFiles(filePath, "*.txt", SearchOption.AllDirectories))
-            //                {
-            //                    comboBox_Valaszthato_Fajlok.Items.Add(f);
-            //                }
-            //            }
-            //        }
-            //        catch (IOException ex)
-            //        {
-            //            Console.WriteLine(ex.Message);
-            //            Console.ReadKey();
-            //        }
-            //    }
-            //}
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 adatforras = openFileDialog1.FileName;
@@ -53,13 +31,15 @@ namespace Charts
                 if (Beolvas(adatforras))
                 {
                     //-- Megrajzolja a grafikont ----------------
-                    Kirajzol();
+                    //Kirajzol();
                 }
             }
         }
 
         bool Beolvas(string forras)
         {
+            int page = 1;
+            bool feldolgozni = false;
             try
             {
                 using (StreamReader sr = new StreamReader(forras))
@@ -67,8 +47,47 @@ namespace Charts
                     sr.ReadLine();
                     while (!sr.EndOfStream)
                     {
-                        string[] sor = sr.ReadLine().Split(';');
-                        adatok.Add(new Adat(float.Parse(sor[0]), float.Parse(sor[1])));
+                        string line = sr.ReadLine();
+                        if (String.IsNullOrEmpty(line))
+                        {
+                            continue;
+                        } 
+                        else if (line.Equals("\f"))
+                        {
+                            page++;
+                            feldolgozni = false;
+                            continue;
+                        } 
+                        else if (line.Substring(1, 5).Equals("-----"))
+                        {
+                            feldolgozni = true;
+                            continue;
+                        }
+
+                        if (feldolgozni)
+                        {
+                            switch (page)
+                            {
+                                case 1:
+                                    //--    List of levels ------------
+                                    Program.levels.Add(new Levels(line));
+                                    break;
+                                case 2:
+                                    //--    List of transitions --------
+                                    break;
+                                case 3:
+                                    //--    Test of Gamma-ray and Level Energies
+                                    break;
+                                case 4:
+                                    //--    Test of Gamma-ray Energy Sums
+                                    break;
+                                case 5:
+                                    //--    Test of Gamma Ray Intensity Sums
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                     }
                 }
                 return true;
@@ -80,37 +99,18 @@ namespace Charts
             }
         }
 
-        void Kirajzol()
-        {
-            chart1.Series.Clear();
-            var series1 = new System.Windows.Forms.DataVisualization.Charting.Series
-            {
-                Name = "Series1",
-                Color = System.Drawing.Color.Green,
-                IsVisibleInLegend = false,
-                IsXValueIndexed = true,
-                ChartType = SeriesChartType.Line
-            };
-
-            this.chart1.Series.Add(series1);
-
-            for (int i = 0; i < adatok.Count; i++)
-            {
-                series1.Points.AddXY(adatok[i].X, adatok[i].Y);
-            }
-            chart1.Invalidate();
-        }
+ 
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            openFileDialog1.InitialDirectory = @"C:\";
+            openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory() + @"..\..";
             openFileDialog1.RestoreDirectory = true;
             openFileDialog1.Title = "Adatfájl kiválasztása";
             openFileDialog1.DefaultExt = "txt";
             openFileDialog1.CheckFileExists = true;
             openFileDialog1.CheckPathExists = true;
-            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.Filter = "measurement data (*.dat)|*.dat|txt files (*.txt)|*.txt|All files (*.*)|*.*";
 
             data_Columns.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             data_Columns.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -136,6 +136,11 @@ namespace Charts
                 column_y.CellTemplate = new DataGridViewTextBoxCell();
             }
             data_Columns.Columns.Insert(0, column_y);
+        }
+
+        private void button_Chart_Level_Click(object sender, EventArgs e)
+        {
+            Program.form_chart_level.Show();
         }
     }
 }

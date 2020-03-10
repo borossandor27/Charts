@@ -8,15 +8,21 @@ namespace Charts
 {
     static class Program
     {
+        public static List<Levels> levels = new List<Levels>();
+        public static Form form_nyito = null;
+        public static Form form_chart_level = null;
         /// <summary>
-        /// The main entry point for the application.
+        ///     A gerjesztett atommag bomlása során kibocsátott gamma‑sugárzások intenzitás‑összegét 
+        ///     és azok becsült hibáit  ellenőrző a program
         /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            form_nyito = new Form_nyito();
+            form_chart_level = new Form_Levels();
+            Application.Run(form_nyito);
         }
     }
 }

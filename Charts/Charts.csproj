@@ -47,17 +47,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adat.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Form_Levels.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Form_Levels.Designer.cs">
+      <DependentUpon>Form_Levels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_nyito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_nyito.Designer.cs">
+      <DependentUpon>Form_nyito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Levels.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Form_Levels.resx">
+      <DependentUpon>Form_Levels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_nyito.resx">
+      <DependentUpon>Form_nyito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -68,6 +77,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="105Pd_tj3.dat" />
     <None Include="adatok.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
