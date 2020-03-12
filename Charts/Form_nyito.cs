@@ -14,7 +14,9 @@ namespace Charts
 {
     public partial class Form_nyito : Form
     {
+
         string adatforras = "";
+
         public Form_nyito()
         {
             InitializeComponent();
@@ -28,10 +30,18 @@ namespace Charts
                 label_fajl.Text = adatforras;
                 label_Utolso_modositas_datum.Text = "Utolsó módosítás: " + File.GetCreationTime(adatforras).ToString("yyyy-MM-dd");
                 label_Letrehozas_datum.Text = "Létrehozás: " + File.GetLastWriteTime(adatforras).ToString("yyyy-MM-dd");
+                data_Columns.Rows.Clear();
                 if (Beolvas(adatforras))
                 {
+                    foreach (Levels item in Program.levels)
+                    {
+                        int sor_index = data_Columns.Rows.Add();
+                        data_Columns.Rows[sor_index].Cells["Level"].Value = Program.levels[sor_index].Level_value;
+                        data_Columns.Rows[sor_index].Cells["Energy"].Value = Program.levels[sor_index].Energy;
+
+                    }
                     //-- Megrajzolja a grafikont ----------------
-                    //Kirajzol();
+                    Program.form_chart_level.Kirajzol();
                 }
             }
         }
@@ -123,19 +133,19 @@ namespace Charts
             //-- Az id oszlop --------------------------------------------------
             DataGridViewColumn column_x = new DataGridViewColumn();
             {
-                column_x.Name = "x";
-                column_x.DataPropertyName = "X";
+                column_x.Name = "Level";
+                column_x.DataPropertyName = "Level";
                 column_x.CellTemplate = new DataGridViewTextBoxCell();
             }
             data_Columns.Columns.Insert(0, column_x);
             
             DataGridViewColumn column_y = new DataGridViewColumn();
             {
-                column_y.Name = "y";
-                column_y.DataPropertyName = "Y";
+                column_y.Name = "Energy";
+                column_y.DataPropertyName = "Energy";
                 column_y.CellTemplate = new DataGridViewTextBoxCell();
             }
-            data_Columns.Columns.Insert(0, column_y);
+            data_Columns.Columns.Insert(1, column_y);
         }
 
         private void button_Chart_Level_Click(object sender, EventArgs e)

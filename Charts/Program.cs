@@ -9,8 +9,8 @@ namespace Charts
     static class Program
     {
         public static List<Levels> levels = new List<Levels>();
-        public static Form form_nyito = null;
-        public static Form form_chart_level = null;
+        public static Form_nyito form_nyito = null;
+        public static Form_Levels form_chart_level = null;
         /// <summary>
         ///     A gerjesztett atommag bomlása során kibocsátott gamma‑sugárzások intenzitás‑összegét 
         ///     és azok becsült hibáit  ellenőrző a program

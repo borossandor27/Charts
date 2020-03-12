@@ -71,7 +71,7 @@
             // 
             // button_Betolt
             // 
-            this.button_Betolt.Location = new System.Drawing.Point(12, 10);
+            this.button_Betolt.Location = new System.Drawing.Point(120, 12);
             this.button_Betolt.Name = "button_Betolt";
             this.button_Betolt.Size = new System.Drawing.Size(75, 23);
             this.button_Betolt.TabIndex = 6;
@@ -94,7 +94,7 @@
             // 
             // button_Chart_Level
             // 
-            this.button_Chart_Level.Location = new System.Drawing.Point(100, 140);
+            this.button_Chart_Level.Location = new System.Drawing.Point(120, 126);
             this.button_Chart_Level.Name = "button_Chart_Level";
             this.button_Chart_Level.Size = new System.Drawing.Size(75, 23);
             this.button_Chart_Level.TabIndex = 8;
@@ -115,7 +115,7 @@
             this.Controls.Add(this.data_Columns);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_nyito";
-            this.Text = "Adatsorok ábrázolása";
+            this.Text = "Gamma‑sugárzások vizsgálata";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.data_Columns)).EndInit();
             this.ResumeLayout(false);

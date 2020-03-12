@@ -26,8 +26,10 @@ namespace Charts
             {
                 this.level_value = 0;
             }
-            double.TryParse(line.Substring(13, 17).Trim().Split('(')[0], out this.energy);
-
+            double.TryParse(line.Substring(13, 17).Trim().Split('(')[0].Replace(".",","), out this.energy);
+            int.TryParse(line.Substring(31, 8).Split('/')[0].Trim(), out this.jpi_value);
+            int.TryParse(line.Substring(31, 8).Split('/')[1].Trim(), out this.jpi_spin);
+            double.TryParse(line.Substring(line.Length - 5, 5).Trim(), out this.k);
         }
 
         public double Energy { get => energy; set => energy = value; }

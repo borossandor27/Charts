@@ -20,26 +20,39 @@ namespace Charts
 
         private void Form_Levels_Load(object sender, EventArgs e)
         {
-            void Kirajzol()
+            Kirajzol();
+        }
+
+        public void Kirajzol()
+        {
+            chart_levels.Series.Clear();
+            var series1 = new System.Windows.Forms.DataVisualization.Charting.Series
             {
-                chart_levels.Series.Clear();
-                var series1 = new System.Windows.Forms.DataVisualization.Charting.Series
-                {
-                    Name = "Series1",
-                    Color = System.Drawing.Color.Green,
-                    IsVisibleInLegend = false,
-                    IsXValueIndexed = true,
-                    ChartType = SeriesChartType.Line
-                };
+                Name = "Level",
+                Color = System.Drawing.Color.Green,
+                IsVisibleInLegend = false,
+                IsXValueIndexed = true,
+                ChartType = SeriesChartType.Line
+            };
 
-                this.chart_levels.Series.Add(series1);
+            this.chart_levels.Series.Add(series1);
 
-                for (int i = 0; i < Program.levels.Count; i++)
-                {
-                    series1.Points.AddXY(Program.levels[i].Level_value, Program.levels[i].Energy);
-                }
-                chart_levels.Invalidate();
+            for (int i = 0; i < Program.levels.Count; i++)
+            {
+                series1.Points.AddXY(Program.levels[i].Level_value, Program.levels[i].Energy);
             }
+            chart_levels.Invalidate();
+        }
+
+        private void Form_Levels_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+        }
+
+        private void button_Close_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

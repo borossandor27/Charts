@@ -31,6 +31,7 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Levels));
             this.chart_levels = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.chart_levels)).BeginInit();
             this.SuspendLayout();
@@ -58,8 +59,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.chart_levels);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_Levels";
-            this.Text = "Form_Levels";
+            this.Text = "Levels";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Levels_FormClosing);
             this.Load += new System.EventHandler(this.Form_Levels_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart_levels)).EndInit();
             this.ResumeLayout(false);
@@ -68,6 +71,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart_levels;
+        public System.Windows.Forms.DataVisualization.Charting.Chart chart_levels;
     }
 }
